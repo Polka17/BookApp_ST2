@@ -1,0 +1,27 @@
+﻿@using PollyBookApp_ST2.Models.Users
+@model IEnumerable<PollyBookApp_ST2.Models.Users.User>
+<div class="grid">
+    <div class="row">
+        <div class="col-2">
+            <a href="/Users/Create">NEW</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">Username</div>
+        <div class="col-1">First Name</div>
+        <div class="col-1">Last Name</div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-1">@item.Username</div>
+            <div class="col-1">@item.FirstName</div>
+            <div class="col-1">@item.LastName</div>
+            <div class="col-2">
+                <a href="/Users/Edit?id=@item.Id">edit</a>
+                <a href="/Users/DeleteConfirmed?id=@item.Id"
+                   onclick="return confirm('Delete item?')">delete</a>
+            </div>
+        </div>
+    }
+</div>

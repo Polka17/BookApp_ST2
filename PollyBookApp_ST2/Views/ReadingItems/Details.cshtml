@@ -1,0 +1,85 @@
+﻿@using PollyBookApp_ST2.Models.ReadingItems
+@model PollyBookApp_ST2.Models.ReadingItems.ReadingItem
+
+@{
+    ViewData["Title"] = "Item Details";
+}
+
+<div class="container mt-5">
+    <h2>Album Details</h2>
+
+    <div class="album-details label">
+        <h5>Album Information</h5>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3 label">Title</dt>
+            <dd class="col-sm-9 formText">@Model.Title</dd>
+
+            <dt class="col-sm-3 label">Price</dt>
+            <dd class="col-sm-9 formText">@Model.Price.ToString("C")</dd>
+
+            <dt class="col-sm-3 label">Description</dt>
+            <dd class="col-sm-9 formText">@Model.Description</dd>
+
+            <dt class="col-sm-3 label">Item Picture</dt>
+            <dd class="col-sm-9">
+                <img src="@Model.PicturePath" alt="Item Picture" class="img-thumbnail" style="width: 150px; height: 150px;" />
+            </dd>
+
+            @if (Model is Book book)
+            {
+                <dt class="col-sm-3 label">Author</dt>
+                <dd class="col-sm-9 formText">@book.Author</dd>
+                <dt class="col-sm-3 label">ISBN</dt>
+                <dd class="col-sm-9 formText">@book.ISBN</dd>
+                <dt class="col-sm-3 label">Genre</dt>
+                <dd class="col-sm-9 formText">@book.Genre</dd>
+            }
+            else if (Model is Magazine mag)
+            {
+                <dt class="col-sm-3 label">Publisher</dt>
+                <dd class="col-sm-9 formText">@mag.Publisher</dd>
+                <dt class="col-sm-3 label">Domain</dt>
+                <dd class="col-sm-9 formText">@mag.Domain</dd>
+            }
+            else if (Model is Comics com)
+            {
+                <dt class="col-sm-3 label">Style</dt>
+                <dd class="col-sm-9 formText">@com.Style</dd>
+                <dt class="col-sm-3 label">Edition</dt>
+                <dd class="col-sm-9 formText">@com.Edition</dd>
+            }
+        </dl>
+    </div>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .album-details {
+        margin-bottom: 20px;
+    }
+
+    .btn-warning,
+    .btn-secondary {
+        width: 48%;
+        display: inline-block;
+    }
+</style>

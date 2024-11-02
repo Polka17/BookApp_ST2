@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PollyBookApp_ST2.Models.ReadingItems.ReadingItem>
+
+@{
+    ViewData["Title"] = "Reading Item List";
+}
+
+<h3>
+    <a asp-controller="ReadingItems" asp-action="Create" class="btn btn-primary">Create new reading item</a>
+</h3>
+
+<div class="container mt-4">
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        @if (!string.IsNullOrEmpty(item.PicturePath))
+                        {
+                            <img src="@item.PicturePath" alt="Cover for @item.Title" class="card-img-top" style="height: 200px; object-fit: cover;" />
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text"><strong>Price:</strong> @item.Price.ToString("C")</p>
+                            <p class="card-text"><strong>Description:</strong> @item.Description</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a asp-controller="ReadingItems" asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-controller="ReadingItems" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                            <a asp-controller="ReadingItems" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reading item?');">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-warning text-center">
+                    No reading items found.
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.2s;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .container {
+        max-width: 1200px;
+    }
+</style>

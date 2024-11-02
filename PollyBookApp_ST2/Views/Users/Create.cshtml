@@ -1,0 +1,54 @@
+﻿@model PollyBookApp_ST2.Models.Users.User
+<form action="/Users/Create" method="post">
+    <div class="grid">
+        <div class="row">
+            <div class="col-1">
+                <h6>Username: </h6>
+            </div>
+            <div class="col-2">
+                @Html.TextBoxFor(m => m.Username)
+            </div>
+            <div>
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <h6>First name: </h6>
+            </div>
+            <div class="col-2">
+                @Html.TextBoxFor(m => m.FirstName)
+            </div>
+            <div>
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <h6>Last name: </h6>
+            </div>
+            <div class="col-2">
+                @Html.TextBoxFor(m => m.LastName)
+            </div>
+            <div>
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="label">User Type:</label>
+            <select name="userType" class="form-control">
+                <option value="">Select Type</option>
+                @foreach (var userType in ViewBag.UserType)
+                {
+                    <option value="@userType">@userType</option>
+                }
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <input class="right" type="submit" value="Save" />
+                <a class="right" href="/Users/Index">Back</a>
+            </div>
+        </div>
+    </div>
+</form>
