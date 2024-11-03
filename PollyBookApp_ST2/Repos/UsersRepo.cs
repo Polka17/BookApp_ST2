@@ -5,6 +5,13 @@ using System.Linq.Expressions;
 
 namespace PollyBookApp_ST2.Repos
 {
+    // Here we come with the Repository pattern. We have not gone into detail with it, but I just decided to add it for "spice" jk, jk.
+    // Because I used the Factory pattern for the main object in my project I wanted to show that the repository pattern will actually reallt simplify
+    //  and group the functionality in one place. 
+    // It provides flexibilty and consistency, since the changes can be made in only place.
+    // And of course. reduces the need for thorough code.
+
+    //For the implementation see the UsersController
     public class UsersRepo
     {
         private readonly BookAppDbContext _context;

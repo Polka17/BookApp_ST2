@@ -3,7 +3,10 @@
     ViewData["Title"] = "Reading Items List";
 }
 
-@* Notification Area *@
+@* 
+    Notification Area 
+    Here we show the message that was triggered based on the user's actions. Either on Create or on Edit.
+*@
 @if (!string.IsNullOrEmpty(ViewBag.NotificationMessage))
 {
     <div class="notification">
@@ -15,6 +18,10 @@
     <a asp-controller="ReadingItems" asp-action="Create" class="btn btn-primary">Create new reading item</a>
 </h3>
 
+
+@*
+    And here is the form for the strategy type and the query/price ranges, needed for the search
+*@
 <div class="container mt-5">
     <form asp-action="Search" method="get">
         <div class="form-group">

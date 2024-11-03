@@ -7,6 +7,9 @@ namespace PollyBookApp_ST2.Controllers
 {
     public class UsersController : Controller
     {
+        // Instance UserRepo in order to use its methods for the CRUD operations.
+        // I will not go into details about the different Actions. We night do that at Lab.
+        //But you can see that in comparison to the other Controller this is much simplified :)
         private readonly UsersRepo _usersRepo;
 
         public UsersController(UsersRepo usersRepo)
