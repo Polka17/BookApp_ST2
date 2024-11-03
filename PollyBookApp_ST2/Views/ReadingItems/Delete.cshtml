@@ -1,9 +1,9 @@
 ﻿@using PollyBookApp_ST2.Models.ReadingItems
 @model PollyBookApp_ST2.Models.ReadingItems.ReadingItem
-
 @{
     ViewData["Title"] = "Delete Reading Item";
 }
+
 
 <div class="container mt-5">
     <h2>Delete Reading Item</h2>
@@ -48,6 +48,7 @@
         </dl>
     </div>
 
+
     <form asp-action="DeleteConfirmed">
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
@@ -58,7 +59,6 @@
 </div>
 
 <style>
-    /* Custom CSS for styling the form */
     .container {
         max-width: 600px;
         margin: auto;
@@ -73,15 +73,12 @@
         margin-bottom: 20px;
     }
 
-    .item-details {
+    .album-details {
         margin-bottom: 20px;
     }
 
-    .btn-danger, .btn-secondary {
-        width: 48%;
-    }
-
-    .form-group {
-        text-align: center;
+    .btn-danger,
+    .btn-secondary {
+        width: 100%;
     }
 </style>

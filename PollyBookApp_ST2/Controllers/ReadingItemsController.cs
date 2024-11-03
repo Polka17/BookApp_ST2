@@ -40,21 +40,23 @@ namespace PollyBookApp_ST2.Controllers
             return View(items);
         }
 
-        public async Task<IActionResult> Search(string query, string strategyType)
+        public async Task<IActionResult> Search(string query, string strategyType, decimal? minPrice = null, decimal? maxPrice = null)
         {
             var items =  await _context.ReadingItems.ToListAsync();
 
-            // Determine the search strategy based on user input
             if (strategyType == "Title")
             {
                 _searchContext.SetSearchStrategy(new TitleSearchStrategy());
+            }
+            else if (strategyType == "PriceRange" && minPrice.HasValue && maxPrice.HasValue)
+            {
+                _searchContext.SetSearchStrategy(new PriceRangeSearchStrategy(minPrice.Value, maxPrice.Value));
             }
             else
             {
                 return BadRequest("Invalid search strategy type or type mismatch.");
             }
 
-            // Get the search results
             var searchResults = _searchContext.ExecuteSearch(items, query);
 
             return View(searchResults);
@@ -70,7 +72,6 @@ namespace PollyBookApp_ST2.Controllers
 
             return View(item);
         }
-
 
         public async Task<IActionResult> Create()
         {
@@ -130,7 +131,6 @@ namespace PollyBookApp_ST2.Controllers
             string message = $"New {item.GetType().Name} added: \'{item.Title}\'";
             _notificationManager.Notify(message);
 
-            // Store notification in TempData for alerting in the view
             TempData["UserNotifications"] = message;
 
             return RedirectToAction(nameof(Index));
@@ -208,7 +208,6 @@ namespace PollyBookApp_ST2.Controllers
             string message = $"The \'{item.Title}\' {item.GetType().Name} was updated!";
             _notificationManager.Notify(message);
 
-            // Store notification in TempData for alerting in the view
             TempData["UserNotifications"] = message;
 
             return RedirectToAction(nameof(Index));
@@ -224,7 +223,6 @@ namespace PollyBookApp_ST2.Controllers
             return View(item);
         }
 
-        // POST: Albums/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -4,7 +4,6 @@
     {
         public void Update(string message)
         {
-            // This could be a console log, a logging system, etc.
             Console.WriteLine($"Notification received: {message}");
         }
     }

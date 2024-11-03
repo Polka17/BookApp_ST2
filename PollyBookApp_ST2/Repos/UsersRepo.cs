@@ -15,10 +15,6 @@ namespace PollyBookApp_ST2.Repos
         }
         public IEnumerable<User> GetAll() => _context.Set<User>().ToList();
         public User GetById(int id) => _context.Set<User>().Find(id);
-        public User FirstOrDefault(Expression<Func<User, bool>> filter)
-        {
-            return _context.Set<User>().FirstOrDefault(filter);
-        }
 
         public void Add(User user) => _context.Add(user);
 

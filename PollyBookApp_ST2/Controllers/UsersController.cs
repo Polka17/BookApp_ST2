@@ -62,14 +62,6 @@ namespace PollyBookApp_ST2.Controllers
             return View(user);
         }
 
-        //public IActionResult Delete(int id)
-        //{
-
-        //    var user = _usersRepo.GetById(id);
-        //    if (user == null) return NotFound();
-        //    return View(user);
-        //}
-
         public IActionResult DeleteConfirmed(int id)
         {
             _usersRepo.Remove(id);

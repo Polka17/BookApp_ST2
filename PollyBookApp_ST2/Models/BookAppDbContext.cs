@@ -13,21 +13,6 @@ namespace PollyBookApp_ST2.Models
         public BookAppDbContext(DbContextOptions<BookAppDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<User>().HasData(new User()
-            //{
-            //    Id = 1,
-            //    Username = "polka",
-            //    Password = "polkapass",
-            //    FirstName = "Polya",
-            //    LastName = "Andonova",
-            //    IsAdmin = true,
-            //});
-
-            //modelBuilder.Entity<User>()
-            //    .HasAlternateKey(nameof(User.Username));
-
-
-
             modelBuilder.Entity<ReadingItem>()
                 .HasDiscriminator<string>("ItemType")
                 .HasValue<Book>("Book")
@@ -36,7 +21,5 @@ namespace PollyBookApp_ST2.Models
 
             base.OnModelCreating(modelBuilder);
         }
-
-
     }
 }
