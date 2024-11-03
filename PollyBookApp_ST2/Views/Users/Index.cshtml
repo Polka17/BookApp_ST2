@@ -1,27 +1,68 @@
 ﻿@using PollyBookApp_ST2.Models.Users
 @model IEnumerable<PollyBookApp_ST2.Models.Users.User>
-<div class="grid">
-    <div class="row">
-        <div class="col-2">
-            <a href="/Users/Create">NEW</a>
+@{
+    ViewData["Title"] = "User List";
+}
+
+<div class="container mt-5">
+    <h2>User List</h2>
+
+    <div class="row mb-3">
+        <div class="col text-right">
+            <a href="/Users/Create" class="btn btn-primary">NEW</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-1">Username</div>
-        <div class="col-1">First Name</div>
-        <div class="col-1">Last Name</div>
-    </div>
-    @foreach (var item in Model)
-    {
-        <div class="row">
-            <div class="col-1">@item.Username</div>
-            <div class="col-1">@item.FirstName</div>
-            <div class="col-1">@item.LastName</div>
-            <div class="col-2">
-                <a href="/Users/Edit?id=@item.Id">edit</a>
-                <a href="/Users/DeleteConfirmed?id=@item.Id"
-                   onclick="return confirm('Delete item?')">delete</a>
-            </div>
-        </div>
-    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>User Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Username</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.UserType</td>
+                    <td>
+                        <a href="/Users/Edit?id=@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/Users/DeleteConfirmed?id=@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Delete item?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .btn-primary, .btn-warning, .btn-danger {
+        margin-right: 5px;
+    }
+</style>

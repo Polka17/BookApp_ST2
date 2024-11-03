@@ -1,158 +1,4 @@
-﻿@* @model PollyBookApp_ST2.Models.ReadingItems.ReadingItem
-@{
-    ViewData["Title"] = "Create Item";
-}
-
-
-<div class="container mt-5">
-    <h2>Create Item</h2>
-
-    <form asp-action="Create" enctype="multipart/form-data">
-        <div class="form-group">
-            <label class="label">Item Type:</label>
-            <select id="itemType" name="itemType" class="form-control" onchange="showItemFields()" required>
-                <option value="">Select Item Type</option>
-                <option value="book">Book</option>
-                <option value="magazine">Magazine</option>
-                <option value="comics">Comics</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label class="label">Title:</label>
-            <input type="text" name="title" class="form-control" required />
-        </div>
-
-        <div class="form-group">
-            <labe class="label" l>Price:</labe>
-            <input type="number" name="price" class="form-control" required step="0.01" />
-        </div>
-
-        <div class="form-group">
-            <label class="label">Description:</label>
-            <textarea name="description" class="form-control" required></textarea>
-        </div>
-
-        <div id="bookFields" style="display:none;">
-            <div class="form-group">
-                <label class="label">Author:</label>
-                <input type="text" name="author" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="label">ISBN:</label>
-                <input type="text" name="isbn" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="label">Genre:</label>
-                <select name="genre" class="form-control">
-                    <option value="">Select Genre</option>
-                    @foreach (var genre in ViewBag.Genre)
-                    {
-                        <option value="@genre">@genre</option>
-                    }
-                </select>
-            </div>
-        </div>
-
-        <div id="magazineFields" style="display:none;">
-            <div class="form-group">
-                <label class="label">Publisher:</label>
-                <input type="text" name="publisher" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="label">Domain:</label>
-                <select name="domain" class="form-control">
-                    <option value="">Select Domain</option>
-                    @foreach (var domain in ViewBag.Domain)
-                    {
-                        <option value="@domain">@domain</option>
-                    }
-                </select>
-            </div>
-        </div>
-
-        <div id="comicsFields" style="display:none;">
-            <div class="form-group">
-                <label class="label">Style:</label>
-                <select name="style" class="form-control">
-                    <option value="">Select Style</option>
-                    @foreach (var style in ViewBag.Style)
-                    {
-                        <option value="@style">@style</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="label">Edition:</label>
-                <select name="edition" class="form-control">
-                    <option value="">Select Domain</option>
-                    @foreach (var edition in ViewBag.Edition)
-                    {
-                        <option value="@edition">@edition</option>
-                    }
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="label">Picture:</label>
-            <input type="file" name="pictureFile" class="form-control" accept="image/*" />
-        </div>
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Create Item</button>
-            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-        </div>
-    </form>
-</div>
-
-
-<script>
-    function showItemFields() {
-        const itemType = document.getElementById("itemType").value;
-        const bookFields = document.getElementById("bookFields");
-        const magazineFields = document.getElementById("magazineFields");
-        const comicsFields = document.getElementById("comicsFields");
-
-        bookFields.style.display = "none";
-        magazineFields.style.display = "none";
-        comicsFields.style.display = "none";
-
-        if (itemType === "book") {
-            bookFields.style.display = "block";
-        } else if (itemType === "magazine") {
-            magazineFields.style.display = "block";
-        } else if (itemType === "comics") {
-            comicsFields.style.display = "block";
-        }
-    }
-
-    window.onload = showItemFields;
-</script>
-
-<style>
-    .container {
-        max-width: 600px;
-        margin: auto;
-        padding: 20px;
-        background: #f9f9f9;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .btn-primary, .btn-secondary {
-        width: 100%;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem
-    }
-</style> *@
-
-@model PollyBookApp_ST2.Models.ReadingItems.ReadingItem
+﻿@model PollyBookApp_ST2.Models.ReadingItems.ReadingItem
 @{
     ViewData["Title"] = "Create Item";
 }
@@ -289,38 +135,32 @@
     function validateForm() {
         let isValid = true;
 
-        // Clear all previous errors
         document.querySelectorAll('.error').forEach(el => el.textContent = '');
 
-        // Item Type
         const itemType = document.getElementById("itemType").value;
         if (!itemType) {
             document.getElementById("itemTypeError").textContent = "Item type is required.";
             isValid = false;
         }
 
-        // Title
         const title = document.getElementById("title").value;
         if (!title) {
             document.getElementById("titleError").textContent = "Title is required.";
             isValid = false;
         }
 
-        // Price
         const price = document.getElementById("price").value;
         if (!price || price <= 0) {
             document.getElementById("priceError").textContent = "Price must be greater than 0.";
             isValid = false;
         }
 
-        // Description
         const description = document.getElementById("description").value;
         if (!description || description.length < 10) {
             document.getElementById("descriptionError").textContent = "Description must be at least 10 characters long.";
             isValid = false;
         }
 
-        // Conditional Fields based on Item Type
         if (itemType === "book") {
             const author = document.getElementById("author").value;
             const isbn = document.getElementById("isbn").value;

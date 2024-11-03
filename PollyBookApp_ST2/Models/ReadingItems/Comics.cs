@@ -2,6 +2,7 @@
 
 namespace PollyBookApp_ST2.Models.ReadingItems
 {
+    // Again a descendant of the ReadingItem class. 
     public class Comics: ReadingItem
     {
         public Style Style { get; set; }

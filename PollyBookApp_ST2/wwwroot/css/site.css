@@ -17,25 +17,24 @@ body {
   margin-bottom: 60px;
 }
 
-/* General aesthetic */
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #90B3AF; /* Very light blue */
-    color: #F5F4F2; /* Soft teal for text */
+    background-color: #90B3AF; 
+    color: #F5F4F2; 
     margin: 0;
     padding: 0;
 }
 
 h2 {
-    color: #FFABAB; /* Soft pink for headings */
+    color: #FFABAB; 
     text-transform: uppercase;
-    margin-bottom: 1.5rem; /* Adjusted margin with rem */
+    margin-bottom: 1.5rem; 
     font-size: 2rem;
-    text-align: center; /* Center the text */
+    text-align: center; 
 }
 
 p {
-    color: #fefff1; /* Soft teal text */
+    color: #fefff1; 
     font-size: 1.1rem;
     line-height: 1.6;
 }
@@ -43,24 +42,24 @@ p {
 img {
     max-width: 100%;
     height: auto;
-    border-radius: 1rem; /* Rounded corners for images */
+    border-radius: 1rem;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
-/* Card styling */
+
 .card, .event-card {
-    background-color: #054150; /* Dark teal for cards */
-    padding: 1.2rem; /* Padding with rem */
-    border-radius: 1rem; /* Rounded corners */
+    background-color: #054150; 
+    padding: 1.2rem; 
+    border-radius: 1rem; 
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-    margin: 1.25rem 0; /* Margin for spacing between cards and sections */
-    max-width: 90%; /* Responsive card size */
-    margin-left: auto; /* Center cards */
-    margin-right: auto; /* Center cards */
+    margin: 1.25rem 0; 
+    max-width: 90%; 
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
     .card-body, .event-card h3 {
-        color: #E7DBBC; /* Light beige for text */
+        color: #E7DBBC; 
     }
 
 .card {
@@ -70,24 +69,24 @@ img {
     .card:hover {
         transform: scale(1.05);
     }
-/* Music card text color */
+
 .music-facts .card-body, .music-facts .event-card h3 {
-    color: #F5F4F2; /* White for text inside music cards */
+    color: #F5F4F2; 
 }
 
 .btn {
-    background-color: #FF6F61; /* Soft coral for buttons */
-    color: #FFFFFF; /* White for button text */
-    padding: 0.625rem 1.25rem; /* Padding with rem */
-    border-radius: 0.5rem; /* Rounded corners for buttons */
+    background-color: #FF6F61; 
+    color: #FFFFFF; 
+    padding: 0.625rem 1.25rem; 
+    border-radius: 0.5rem; 
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif;
     border: none;
 }
 
     .btn:hover {
-        background-color: #FF9B8D; /* Light coral for hover */
-        color: #FFFFFF; /* White text */
+        background-color: #FF9B8D; 
+        color: #FFFFFF; 
     }
 
 .label {
@@ -98,10 +97,10 @@ img {
     color: #3c4256
 }
 .notification {
-    background-color: #d4edda; /* Light green background */
-    color: #155724; /* Dark green text */
+    background-color: #d4edda; 
+    color: #155724; 
     padding: 15px;
     margin-bottom: 20px;
-    border: 1px solid #c3e6cb; /* Light green border */
+    border: 1px solid #c3e6cb; 
     border-radius: 5px;
 }

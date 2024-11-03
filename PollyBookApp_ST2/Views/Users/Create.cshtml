@@ -1,54 +1,106 @@
 ﻿@model PollyBookApp_ST2.Models.Users.User
-<form action="/Users/Create" method="post">
-    <div class="grid">
-        <div class="row">
-            <div class="col-1">
-                <h6>Username: </h6>
-            </div>
-            <div class="col-2">
-                @Html.TextBoxFor(m => m.Username)
-            </div>
-            <div>
-                @Html.ValidationMessageFor(m => m.Username)
-            </div>
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="container mt-5">
+    <h2>Create User</h2>
+
+    <form id="createUserForm" asp-action="Create" method="post" onsubmit="return validateUserForm()">
+        <div class="form-group">
+            <label class="label">Username:</label>
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", required = "required" })
+            <small class="error" id="usernameError">@Html.ValidationMessageFor(m => m.Username)</small>
         </div>
-        <div class="row">
-            <div class="col-1">
-                <h6>First name: </h6>
-            </div>
-            <div class="col-2">
-                @Html.TextBoxFor(m => m.FirstName)
-            </div>
-            <div>
-                @Html.ValidationMessageFor(m => m.FirstName)
-            </div>
+
+        <div class="form-group">
+            <label class="label">First Name:</label>
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "required" })
+            <small class="error" id="firstNameError">@Html.ValidationMessageFor(m => m.FirstName)</small>
         </div>
-        <div class="row">
-            <div class="col-1">
-                <h6>Last name: </h6>
-            </div>
-            <div class="col-2">
-                @Html.TextBoxFor(m => m.LastName)
-            </div>
-            <div>
-                @Html.ValidationMessageFor(m => m.LastName)
-            </div>
+
+        <div class="form-group">
+            <label class="label">Last Name:</label>
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "required" })
+            <small class="error" id="lastNameError">@Html.ValidationMessageFor(m => m.LastName)</small>
         </div>
+
         <div class="form-group">
             <label class="label">User Type:</label>
-            <select name="userType" class="form-control">
+            <select name="userType" class="form-control" required>
                 <option value="">Select Type</option>
                 @foreach (var userType in ViewBag.UserType)
                 {
                     <option value="@userType">@userType</option>
                 }
             </select>
+            <small class="error" id="userTypeError"></small>
         </div>
-        <div class="row">
-            <div class="col-3">
-                <input class="right" type="submit" value="Save" />
-                <a class="right" href="/Users/Index">Back</a>
-            </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
         </div>
-    </div>
-</form>
+    </form>
+</div>
+
+<script>
+    function validateUserForm() {
+        let isValid = true;
+
+        document.querySelectorAll('.error').forEach(el => el.textContent = '');
+
+        const username = document.querySelector('input[name="Username"]').value;
+        if (!username) {
+            document.getElementById("usernameError").textContent = "Username is required.";
+            isValid = false;
+        }
+
+        const firstName = document.querySelector('input[name="FirstName"]').value;
+        if (!firstName) {
+            document.getElementById("firstNameError").textContent = "First name is required.";
+            isValid = false;
+        }
+
+        const lastName = document.querySelector('input[name="LastName"]').value;
+        if (!lastName) {
+            document.getElementById("lastNameError").textContent = "Last name is required.";
+            isValid = false;
+        }
+
+        const userType = document.querySelector('select[name="userType"]').value;
+        if (!userType) {
+            document.getElementById("userTypeError").textContent = "User type is required.";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
+
+<style>
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .error {
+        color: red;
+        font-size: 0.9em;
+    }
+</style>
