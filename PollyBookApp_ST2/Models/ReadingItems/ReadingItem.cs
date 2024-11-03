@@ -1,4 +1,6 @@
-﻿namespace PollyBookApp_ST2.Models.ReadingItems
+﻿using PollyBookApp_ST2.Models.Users;
+
+namespace PollyBookApp_ST2.Models.ReadingItems
 {
     public abstract class ReadingItem
     {
@@ -7,5 +9,6 @@
         public decimal Price { get; set; }
         public string PicturePath { get; set; }
         public string Description { get; set; }
+
     }
 }

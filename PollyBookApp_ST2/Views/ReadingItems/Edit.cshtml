@@ -68,25 +68,25 @@
             }
             @if (Model is Magazine mag)
             {
-                    <div class="form-group">
-                        <label class="label">Publisher:</label>
-                        <input type="text" name="publisher" class="form-control" value="@(mag.Publisher)" />
-                    </div>
+                <div class="form-group">
+                    <label class="label">Publisher:</label>
+                    <input type="text" name="publisher" class="form-control" value="@(mag.Publisher)" />
+                </div>
 
-                    <div class="form-group">
-                        <label class="label">Domain:</label>
-                        <select name="domain" class="form-control">
+                <div class="form-group">
+                    <label class="label">Domain:</label>
+                    <select name="domain" class="form-control">
                         <option value="">@mag.Domain</option>
-                            @foreach (var domain in ViewBag.Domain)
-                            {
-                                var isSelected = (mag.Domain.ToString() == domain.ToString())
-                                ? "selected"
-                                : "";
+                        @foreach (var domain in ViewBag.Domain)
+                        {
+                            var isSelected = (mag.Domain.ToString() == domain.ToString())
+                            ? "selected"
+                            : "";
 
-                                <option value="@domain"> @isSelected>@domain</option>
-                            }
-                        </select>
-                    </div>
+                            <option value="@domain"> @isSelected>@domain</option>
+                        }
+                    </select>
+                </div>
             }
 
             @if (Model is Comics com)

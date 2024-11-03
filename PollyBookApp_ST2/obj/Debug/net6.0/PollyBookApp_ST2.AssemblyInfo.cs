@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PollyBookApp_ST2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b5f4a30bb8a63793c1a097e49c1eae9aa2625d46")]
 [assembly: System.Reflection.AssemblyProductAttribute("PollyBookApp_ST2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PollyBookApp_ST2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

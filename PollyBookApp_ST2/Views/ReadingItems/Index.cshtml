@@ -4,9 +4,31 @@
     ViewData["Title"] = "Reading Item List";
 }
 
+@* Notification Area *@
+    @if (!string.IsNullOrEmpty(ViewBag.NotificationMessage))
+    {
+        <div class="notification">
+            @ViewBag.NotificationMessage
+        </div>
+    }
+
 <h3>
     <a asp-controller="ReadingItems" asp-action="Create" class="btn btn-primary">Create new reading item</a>
 </h3>
+<form asp-action="Search" method="get">
+    <div>
+        <label for="query">Search Query:</label>
+        <input type="text" id="query" name="query" required />
+    </div>
+    <div>
+        <label for="strategyType">Search By:</label>
+        <select id="strategyType" name="strategyType">
+            <option value="Title">Title</option>
+
+        </select>
+    </div>
+    <button type="submit">Search</button>
+</form>
 
 <div class="container mt-4">
     <div class="row">
@@ -57,4 +79,14 @@
     .container {
         max-width: 1200px;
     }
+
+    .notification {
+        background-color: #d4edda; /* Light green background */
+        color: #155724; /* Dark green text */
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #c3e6cb; /* Light green border */
+        border-radius: 5px;
+    }
 </style>
+

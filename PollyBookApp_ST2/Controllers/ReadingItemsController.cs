@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PollyBookApp_ST2.Models;
 using PollyBookApp_ST2.Models.Enums;
+using PollyBookApp_ST2.Models.Observer;
 using PollyBookApp_ST2.Models.ReadingItems;
+using PollyBookApp_ST2.Models.Strategy;
 using PollyBookApp_ST2.Repos;
 using System.Drawing;
 
@@ -12,11 +15,18 @@ namespace PollyBookApp_ST2.Controllers
     {
         private readonly BookAppDbContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly ReadingItemNotifier _notificationManager;
+        private readonly SearchContext _searchContext;
 
-        public ReadingItemsController(BookAppDbContext context, IWebHostEnvironment hostEnvironment)
+        public ReadingItemsController(BookAppDbContext context, IWebHostEnvironment hostEnvironment, ReadingItemNotifier notificationManager, SearchContext searchContext)
         {
             _context = context;
             _hostEnvironment = hostEnvironment;
+            _notificationManager = notificationManager;
+            _searchContext = searchContext;
+
+            var consoleObserver = new ConsoleNotificationObserver();
+            _notificationManager.Attach(consoleObserver);
         }
 
         public async Task<IActionResult> Index(string itemType)
@@ -25,8 +35,29 @@ namespace PollyBookApp_ST2.Controllers
              ? await _context.ReadingItems.ToListAsync()
              : _context.ReadingItems.AsEnumerable().Where(a => a.GetType().Name == itemType).ToList();
 
+            ViewBag.NotificationMessage = TempData["UserNotifications"] as string;
             ViewBag.ItemType = itemType;
             return View(items);
+        }
+
+        public async Task<IActionResult> Search(string query, string strategyType)
+        {
+            var items =  await _context.ReadingItems.ToListAsync();
+
+            // Determine the search strategy based on user input
+            if (strategyType == "Title")
+            {
+                _searchContext.SetSearchStrategy(new TitleSearchStrategy());
+            }
+            else
+            {
+                return BadRequest("Invalid search strategy type or type mismatch.");
+            }
+
+            // Get the search results
+            var searchResults = _searchContext.ExecuteSearch(items, query);
+
+            return View(searchResults);
         }
 
         public async Task<IActionResult> Details(int id)
@@ -41,12 +72,13 @@ namespace PollyBookApp_ST2.Controllers
         }
 
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ViewBag.Domain = Enum.GetValues(typeof(Domain)).Cast<Domain>();
             ViewBag.Edition = Enum.GetValues(typeof(Edition)).Cast<Edition>();
             ViewBag.Genre = Enum.GetValues(typeof(Genre)).Cast<Genre>();
             ViewBag.Style = Enum.GetValues(typeof(Style)).Cast<Style>();
+
             return View();
         }
 
@@ -90,8 +122,16 @@ namespace PollyBookApp_ST2.Controllers
                 item.PicturePath = "/images/" + fileName;
             }
 
+            
+
             _context.ReadingItems.Add(item);
             await _context.SaveChangesAsync();
+
+            string message = $"New {item.GetType().Name} added: \'{item.Title}\'";
+            _notificationManager.Notify(message);
+
+            // Store notification in TempData for alerting in the view
+            TempData["UserNotifications"] = message;
 
             return RedirectToAction(nameof(Index));
         }
@@ -164,6 +204,12 @@ namespace PollyBookApp_ST2.Controllers
 
             _context.Update(item);
             await _context.SaveChangesAsync();
+
+            string message = $"The \'{item.Title}\' {item.GetType().Name} was updated!";
+            _notificationManager.Notify(message);
+
+            // Store notification in TempData for alerting in the view
+            TempData["UserNotifications"] = message;
 
             return RedirectToAction(nameof(Index));
         }

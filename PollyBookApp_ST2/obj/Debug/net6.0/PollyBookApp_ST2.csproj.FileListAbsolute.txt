@@ -76,3 +76,4 @@ C:\Users\Poli_\source\repos\PollyBookApp_ST2\PollyBookApp_ST2\obj\Debug\net6.0\r
 C:\Users\Poli_\source\repos\PollyBookApp_ST2\PollyBookApp_ST2\obj\Debug\net6.0\PollyBookApp_ST2.pdb
 C:\Users\Poli_\source\repos\PollyBookApp_ST2\PollyBookApp_ST2\obj\Debug\net6.0\PollyBookApp_ST2.genruntimeconfig.cache
 C:\Users\Poli_\source\repos\PollyBookApp_ST2\PollyBookApp_ST2\obj\Debug\net6.0\ref\PollyBookApp_ST2.dll
+C:\Users\Poli_\source\repos\PollyBookApp_ST2\PollyBookApp_ST2\obj\Debug\net6.0\PollyBookApp_ST2.sourcelink.json
